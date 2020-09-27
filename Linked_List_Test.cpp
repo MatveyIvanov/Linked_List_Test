@@ -70,16 +70,16 @@ namespace LinkedListTest
 		TEST_METHOD(TestAt) {
 			int arr[] = { 1, 2, 3, 4, 5 };
 			LinkedList* list = new LinkedList(arr, 5);
-			Assert::AreEqual(2, list->at(1));
-			Assert::AreNotEqual(4, list->at(2));
+			Assert::AreEqual(arr[1], list->at(1));
+			Assert::AreNotEqual(arr[3], list->at(2));
 			Assert::ExpectException<out_of_range>([list] {list->at(30); });
 		}
 		TEST_METHOD(TestRemove) {
 			int arr[] = { 1, 2, 3, 4, 5 };
 			LinkedList* list = new LinkedList(arr, 5);
 			list->remove(2);
-			Assert::AreNotEqual(3, list->at(2));
-			Assert::AreEqual(4, list->at(2));
+			Assert::AreNotEqual(arr[2], list->at(2));
+			Assert::AreEqual(arr[3], list->at(2));
 			Assert::ExpectException<out_of_range>([list] {list->remove(15); });
 		}
 		TEST_METHOD(TestGetSize) {
@@ -103,7 +103,7 @@ namespace LinkedListTest
 			LinkedList* list = new LinkedList(arr, 5);
 			list->set(3, 0);
 			Assert::AreEqual(0, list->at(3));
-			Assert::AreNotEqual(4, list->at(3));
+			Assert::AreNotEqual(arr[3], list->at(3));
 			Assert::ExpectException<out_of_range>([list] {list->set(20, 7); });
 		}
 		TEST_METHOD(TestIsEmpty) {
@@ -119,8 +119,8 @@ namespace LinkedListTest
 			int arr2[] = { -3, -2, -1, 0 };
 			LinkedList* temp_list = new LinkedList(arr2, 4);
 			list->push_front(temp_list);
-			Assert::AreNotEqual(1, list->at(0));
-			Assert::AreEqual(-3, list->at(0));
+			Assert::AreNotEqual(arr1[0], list->at(0));
+			Assert::AreEqual(arr2[0], list->at(0));
 			temp_list->clear();
 			Assert::ExpectException<exception>([list, temp_list] {list->push_front(temp_list); });
 		}
